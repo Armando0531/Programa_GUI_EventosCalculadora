@@ -1,5 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,6 +72,20 @@ class Calculadora extends JFrame implements ActionListener{
 		btn8.addActionListener(this);
 		btn9.addActionListener(this);
 		btnDot.addActionListener(this);
+		
+		areaTexto.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent ke) {
+				String value = areaTexto.getText();
+				int code=ke.getKeyCode();
+				if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9')	
+				||	(!value.contains(".")&&ke.getKeyChar()=='.') || (code==KeyEvent.VK_BACK_SPACE)) {
+					areaTexto.setEditable(true);
+				} else {
+					areaTexto.setEditable(false);
+				}
+			}
+		});
+
 
 		inst(areaTexto,0,0,4,1,GridBagConstraints.BOTH);
 
